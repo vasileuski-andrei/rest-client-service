@@ -1,8 +1,10 @@
 package com.starlight.restclientservice.controller;
 
+import com.starlight.restclientservice.dto.ClientDto;
 import com.starlight.restclientservice.model.Client;
 import com.starlight.restclientservice.service.ClientService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 public class RestClientServiceController {
 
     private ClientService clientService;
+    private ModelMapper modelMapper;
 
     @GetMapping("/clients")
     public List<Client> getAllClients() {
@@ -21,9 +24,10 @@ public class RestClientServiceController {
     }
 
     @PostMapping("/add-client")
-    public Client addClient(@RequestBody Client client) {
+    public Client addClient(@RequestBody ClientDto clientDto) {
+        Client client = convertToClient(clientDto);
         clientService.create(client);
-        return client;
+        return null;
     }
 
     @DeleteMapping("/delete-client/{id}")
@@ -38,7 +42,11 @@ public class RestClientServiceController {
         return client;
     }
 
+    private Client convertToClient(ClientDto userDto) {
+        return modelMapper.map(userDto, Client.class);
     }
+
+}
 
 
 

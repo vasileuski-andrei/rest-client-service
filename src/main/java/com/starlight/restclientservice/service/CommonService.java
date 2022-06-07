@@ -6,7 +6,7 @@ public interface CommonService<T, V> {
 
     List<T> getAll();
 
-    void create(T model);
+    T create(T model);
 
     void delete(V id);
 

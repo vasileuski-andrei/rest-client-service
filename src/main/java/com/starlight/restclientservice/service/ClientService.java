@@ -20,9 +20,9 @@ public class ClientService implements CommonService<Client, String>{
     }
 
     @Override
-    public void create(Client client) {
+    public Client create(Client client) {
         client.setCreationDate(LocalDateTime.now());
-        clientRepository.save(client);
+        return clientRepository.save(client);
     }
 
     @Override
