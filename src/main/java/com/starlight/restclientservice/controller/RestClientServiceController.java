@@ -5,6 +5,7 @@ import com.starlight.restclientservice.model.Client;
 import com.starlight.restclientservice.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,19 +16,15 @@ import java.util.List;
 public class RestClientServiceController {
 
     private ClientService clientService;
-    private ModelMapper modelMapper;
 
     @GetMapping("/clients")
     public List<Client> getAllClients() {
-        List<Client> clients = clientService.getAll();
-        return clients;
+        return clientService.getAll();
     }
 
     @PostMapping("/add-client")
-    public Client addClient(@RequestBody ClientDto clientDto) {
-        Client client = convertToClient(clientDto);
-        clientService.create(client);
-        return null;
+    public Client addClient(@RequestBody @Validated ClientDto clientDto) {
+        return clientService.create(clientDto);
     }
 
     @DeleteMapping("/delete-client/{id}")
@@ -37,13 +34,8 @@ public class RestClientServiceController {
     }
 
     @PutMapping("/update-client/{id}")
-    public Client updateClient(@PathVariable("id") String id, @RequestBody Client client) {
-        clientService.update(id, client);
-        return client;
-    }
-
-    private Client convertToClient(ClientDto userDto) {
-        return modelMapper.map(userDto, Client.class);
+    public Client updateClient(@PathVariable("id") String id, @RequestBody @Validated ClientDto clientDto) {
+        return clientService.update(id, clientDto);
     }
 
 }

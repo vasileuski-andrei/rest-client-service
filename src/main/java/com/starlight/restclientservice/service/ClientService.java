@@ -1,38 +1,51 @@
 package com.starlight.restclientservice.service;
 
+import com.starlight.restclientservice.dto.ClientDto;
 import com.starlight.restclientservice.model.Client;
 import com.starlight.restclientservice.repository.ClientRepository;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class ClientService implements CommonService<Client, String>{
+public class ClientService {
 
-    ClientRepository clientRepository;
+    private final ModelMapper modelMapper;
+    private final ClientRepository clientRepository;
 
-    @Override
     public List<Client> getAll() {
         return clientRepository.findAll();
     }
 
-    @Override
-    public Client create(Client client) {
-        client.setCreationDate(LocalDateTime.now());
-        return clientRepository.save(client);
+    public Client create(ClientDto clientDto) {
+        clientDto.setCreationDate(LocalDateTime.now());
+        return clientRepository.save(convertToClient(clientDto));
     }
 
-    @Override
     public void delete(String id) {
         clientRepository.deleteClientById(id);
     }
 
-    @Override
-    public Client update(String id, Client client) {
-        return null;
+    public Client update(String id, ClientDto clientDto) {
+        Client updatedClient = null;
+        Optional<Client> clientById = clientRepository.findById(id);
+
+        if (clientById.isPresent()) {
+            clientDto.setId(id);
+            clientDto.setCreationDate(clientById.get().getCreationDate());
+            updatedClient = clientRepository.save(convertToClient(clientDto));
+        }
+
+        return updatedClient;
+    }
+
+    private Client convertToClient(ClientDto userDto) {
+        return modelMapper.map(userDto, Client.class);
     }
 
 }
