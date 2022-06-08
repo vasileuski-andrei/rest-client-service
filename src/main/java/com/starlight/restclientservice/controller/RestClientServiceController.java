@@ -4,7 +4,6 @@ import com.starlight.restclientservice.dto.ClientDto;
 import com.starlight.restclientservice.model.Client;
 import com.starlight.restclientservice.service.ClientService;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

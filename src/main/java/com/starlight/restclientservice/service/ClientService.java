@@ -24,7 +24,8 @@ public class ClientService {
 
     public Client create(ClientDto clientDto) {
         clientDto.setCreationDate(LocalDateTime.now());
-        return clientRepository.save(convertToClient(clientDto));
+        Client client = convertToClient(clientDto);
+        return clientRepository.save(client);
     }
 
     public void delete(String id) {
@@ -38,7 +39,8 @@ public class ClientService {
         if (clientById.isPresent()) {
             clientDto.setId(id);
             clientDto.setCreationDate(clientById.get().getCreationDate());
-            updatedClient = clientRepository.save(convertToClient(clientDto));
+            Client client = convertToClient(clientDto);
+            updatedClient = clientRepository.save(client);
         }
 
         return updatedClient;
