@@ -1,6 +1,8 @@
 ext {
     versions = [
             'testcontainers' : '1.16.3',
-            'modelmapper' : '3.1.0'
+            'modelmapper' : '3.1.0',
+            'jsonwebtoken' : '0.9.1',
+            'javaxxmlbind' : '2.3.1'
     ]
 }

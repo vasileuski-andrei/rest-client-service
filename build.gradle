@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "io.freefair.lombok" version "6.3.0"
 	id 'java'
 }
 
@@ -23,13 +24,14 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation "io.jsonwebtoken:jjwt:${versions.jsonwebtoken}"
 	implementation "org.modelmapper:modelmapper:${versions.modelmapper}"
-
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation "javax.xml.bind:jaxb-api:${versions.javaxxmlbind}"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
