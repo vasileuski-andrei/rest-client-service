@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
@@ -31,13 +32,13 @@ public class JwtFilter extends GenericFilterBean {
 
             if (token != null && jwtTokenProvider.isTokenValid(token)) {
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);
-//                log.info("Authentication created.");
+                log.info("Authentication created.");
                 if (authentication != null) {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
         } catch (JwtAuthenticationException e) {
-//            log.info("Do filter: Jwt token is invalid or expired.");
+            log.info("Do filter: Jwt token is invalid or expired.");
             SecurityContextHolder.clearContext();
             ((HttpServletResponse) response).sendError(e.getHttpStatus().value());
         }

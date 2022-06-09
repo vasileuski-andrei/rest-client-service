@@ -4,6 +4,7 @@ import com.starlight.restclientservice.dto.AuthUserDto;
 import com.starlight.restclientservice.security.JwtTokenProvider;
 import com.starlight.restclientservice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
@@ -33,6 +35,7 @@ public class AuthController {
             String userEmail = authUserDto.getEmail();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEmail, authUserDto.getPassword()));
             String token = jwtTokenProvider.createToken(userEmail);
+            log.info("Token successfully created");
             Map<Object, Object> credentialsResponse = new HashMap<>();
             credentialsResponse.put("email", userEmail);
             credentialsResponse.put("token", token);

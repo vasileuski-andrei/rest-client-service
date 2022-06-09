@@ -4,6 +4,7 @@ import com.starlight.restclientservice.dto.ClientDto;
 import com.starlight.restclientservice.model.Client;
 import com.starlight.restclientservice.repository.ClientRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class ClientService {
@@ -37,6 +39,7 @@ public class ClientService {
         Optional<Client> clientById = clientRepository.findById(id);
 
         if (clientById.isPresent()) {
+            log.info(clientById + " is present");
             clientDto.setId(id);
             clientDto.setCreationDate(clientById.get().getCreationDate());
             Client client = convertToClient(clientDto);
