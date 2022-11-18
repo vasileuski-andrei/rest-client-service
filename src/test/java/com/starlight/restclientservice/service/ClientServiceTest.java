@@ -75,7 +75,7 @@ class ClientServiceTest {
         doReturn(new Client()).when(modelMapper).map(clientDto, Client.class);
         doReturn(new Client()).when(clientRepository).save(new Client());
 
-        Client actual = clientService.update(anyString(), clientDto);
+        Client actual = clientService.update(clientDto);
 
         assertThat(actual).isNotNull();
     }

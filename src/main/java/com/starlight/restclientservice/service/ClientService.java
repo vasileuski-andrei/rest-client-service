@@ -15,7 +15,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class ClientService {
+public class ClientService implements CommonService<Client, ClientDto> {
 
     private final ModelMapper modelMapper;
     private final ClientRepository clientRepository;
@@ -34,13 +34,12 @@ public class ClientService {
         clientRepository.deleteClientById(id);
     }
 
-    public Client update(String id, ClientDto clientDto) {
+    public Client update(ClientDto clientDto) {
         Client updatedClient = null;
-        Optional<Client> clientById = clientRepository.findById(id);
+        Optional<Client> clientById = clientRepository.findById(clientDto.getId());
 
         if (clientById.isPresent()) {
             log.info(clientById + " is present");
-            clientDto.setId(id);
             clientDto.setCreationDate(clientById.get().getCreationDate());
             Client client = convertToClient(clientDto);
             updatedClient = clientRepository.save(client);

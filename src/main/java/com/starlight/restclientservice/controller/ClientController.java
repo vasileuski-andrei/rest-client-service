@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
-public class RestClientServiceController {
+public class ClientController {
 
     private ClientService clientService;
 
@@ -21,20 +21,21 @@ public class RestClientServiceController {
         return clientService.getAll();
     }
 
-    @PostMapping("/add-client")
+    @PostMapping("/client")
     public Client addClient(@RequestBody @Validated ClientDto clientDto) {
         return clientService.create(clientDto);
     }
 
-    @DeleteMapping("/delete-client/{id}")
+    @DeleteMapping("/clients/{id}")
     public void deleteClientById(@PathVariable("id") String id) {
         clientService.delete(id);
 
     }
 
-    @PutMapping("/update-client/{id}")
+    @PutMapping("/client/{id}")
     public Client updateClient(@PathVariable("id") String id, @RequestBody @Validated ClientDto clientDto) {
-        return clientService.update(id, clientDto);
+        clientDto.setId(id);
+        return clientService.update(clientDto);
     }
 
 }

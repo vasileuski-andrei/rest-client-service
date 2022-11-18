@@ -29,7 +29,7 @@ dependencies {
 	implementation "io.jsonwebtoken:jjwt:${versions.jsonwebtoken}"
 	implementation "org.modelmapper:modelmapper:${versions.modelmapper}"
 	implementation "javax.xml.bind:jaxb-api:${versions.javaxxmlbind}"
-	implementation "ch.qos.logback:logback-classic:${versions.logback}"
+//	implementation "ch.qos.logback:logback-classic:${versions.logback}"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
