@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientRepository extends MongoRepository<Client, String> {
 
-    void deleteClientById(String id);
-
 }

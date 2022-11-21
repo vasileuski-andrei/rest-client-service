@@ -35,8 +35,8 @@ public class OrderService implements CommonService<Order, OrderDto> {
     }
 
     @Override
-    public void delete(String id) {
-
+    public void deleteById(String id) {
+        orderRepository.deleteById(id);
     }
 
     private Order convertToOrder(OrderDto orderDto) {

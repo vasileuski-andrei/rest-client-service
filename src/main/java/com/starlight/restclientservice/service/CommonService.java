@@ -10,5 +10,5 @@ public interface CommonService<T, K> {
 
     T update(K k);
 
-    void delete(String id);
+    void deleteById(String id);
 }

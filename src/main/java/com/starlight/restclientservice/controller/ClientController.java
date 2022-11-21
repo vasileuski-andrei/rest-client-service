@@ -28,8 +28,7 @@ public class ClientController {
 
     @DeleteMapping("/clients/{id}")
     public void deleteClientById(@PathVariable("id") String id) {
-        clientService.delete(id);
-
+        clientService.deleteById(id);
     }
 
     @PutMapping("/client/{id}")

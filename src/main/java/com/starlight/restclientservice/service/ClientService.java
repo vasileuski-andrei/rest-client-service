@@ -30,8 +30,8 @@ public class ClientService implements CommonService<Client, ClientDto> {
         return clientRepository.save(client);
     }
 
-    public void delete(String id) {
-        clientRepository.deleteClientById(id);
+    public void deleteById(String id) {
+        clientRepository.deleteById(id);
     }
 
     public Client update(ClientDto clientDto) {

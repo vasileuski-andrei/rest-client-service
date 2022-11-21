@@ -22,8 +22,13 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public Order addClient(@RequestBody @Validated OrderDto orderDto) {
+    public Order addOrder(@RequestBody @Validated OrderDto orderDto) {
         return orderService.create(orderDto);
+    }
+
+    @DeleteMapping("/orders/{id}")
+    public void deleteOrderById(@PathVariable("id") String id) {
+        orderService.deleteById(id);
     }
 
 }
