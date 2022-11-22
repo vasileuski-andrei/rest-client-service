@@ -4,7 +4,6 @@ import com.starlight.restclientservice.dto.ClientDto;
 import com.starlight.restclientservice.model.Client;
 import com.starlight.restclientservice.repository.ClientRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
 @Service
 @AllArgsConstructor
 public class ClientService implements CommonService<Client, ClientDto> {
@@ -39,7 +37,6 @@ public class ClientService implements CommonService<Client, ClientDto> {
         Optional<Client> clientById = clientRepository.findById(clientDto.getId());
 
         if (clientById.isPresent()) {
-            log.info(clientById + " is present");
             clientDto.setCreationDate(clientById.get().getCreationDate());
             Client client = convertToClient(clientDto);
             updatedClient = clientRepository.save(client);
